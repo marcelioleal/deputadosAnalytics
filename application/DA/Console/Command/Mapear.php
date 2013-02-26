@@ -8,7 +8,7 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Helper\ProgressHelper;
 
-class Atualizar extends Command
+class Mapear extends Command
 {   
     private $app;
 
@@ -22,7 +22,7 @@ class Atualizar extends Command
     {
         $this
             ->setName('atualizar')
-            ->setDescription('Atualizar Database')
+            ->setDescription('Mapear Database')
             ->addOption(
                'deputados',
                null,
@@ -45,6 +45,7 @@ class Atualizar extends Command
             $deputadoBuilder = new \DA\Builder\Deputado($this->app);
             $deputadoBuilder->atualizarListaDeputados();
         }else if($input->getOption('presencas')) {
+
             switch ($input->getOption('presencas')) {
                 case 'sessao':
                     $output->write("\n\tRecuperacao de Presenças de Sessão Iniciada\n\n");            

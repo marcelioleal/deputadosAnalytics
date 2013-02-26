@@ -1,4 +1,5 @@
 <?php
+
 date_default_timezone_set('America/Sao_Paulo');
 defined('APPLICATION_PATH') || define('APPLICATION_PATH', __DIR__);
 
@@ -6,6 +7,7 @@ require __DIR__.'/../vendor/autoload.php';
 
 $app = new Silex\Application();
 
+//Config
 //Change to Pimple
 $configFile = APPLICATION_PATH."/../config/config.ini";
 $config = parse_ini_file($configFile,true);
@@ -22,7 +24,7 @@ $app['config'] = $config2[APPLICATION_ENV];
 
 if(APPLICATION_ENV != 'automatedtests') {
     $app->register(new Silex\Provider\MonologServiceProvider(), array(
-        'monolog.logfile' => __DIR__.'/../log/live.log',
+        'monolog.logfile' => __DIR__.'/../logs/live.log',
     ));
 } else {
     $app['monolog'] = new \Symfony\Component\HttpKernel\Log\NullLogger();
