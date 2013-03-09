@@ -1,0 +1,63 @@
+{% extends "layout.html" %}
+
+{% block js %}
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+  google.load("visualization", "1", {packages:["corechart"]});
+  google.setOnLoadCallback(drawChart);
+  function drawChart() {
+      
+//    var data = google.visualization.arrayToDataTable([
+//      ['Mês/Ano', 'Sessões', 'Presenças', 'Faltas', 'Média Geral'],
+//      ['Jun/2012',  20,      18,      2,      19],
+//      ['Jul/2012',  22,      16,      6,      20],
+//      ['Ago/2012',  16,      16,      0,      16],
+//      ['Set/2012',  20,      20,      0,      16]
+//    ]);
+
+    var data = new google.visualization.DataTable();
+    data.addColumn('string', 'Mês/Ano');
+    data.addColumn('number', 'Sessões');
+    data.addColumn('number', 'Presenças');
+    data.addColumn('number', 'Faltas');
+    data.addColumn('number', 'Média Geral');
+
+    data.addRow(['Jun/2012', 20, 18, 2, 19]);
+
+    var options = {
+      title: 'Presença em Plenário',
+      animation: {
+          duration: 1000,
+          easing: 'inAndOut'
+      },
+      vAxis: {minValue:0, maxValue:40},
+      vAxis: {title: "Quantidade"},
+      hAxis: {title: "Mês/Ano"}
+    };
+
+    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+    chart.draw(data, options);
+    
+    data.addRows([      
+      ['Jul/2012',  22,      16,      6,      20],
+      ['Ago/2012',  16,      16,      0,      16],
+      ['Set/2012',  20,      20,      0,      16]
+    ]);
+    chart.draw(data, options);
+  }
+</script>
+{% endblock %}
+
+
+{% block content %}
+    <p>Deputado Profile</p>
+    <image src="http://www.camara.gov.br/internet/deputado/bandep/{{ deputado.identificacao }}.jpg"/> <br />
+    
+    
+    Nome: {{ deputado.nome }}<br />
+    Partido: {{deputado.partido}}<br />
+    Estado: {{deputado.estado}}<br />
+    <a href="http://www.camara.leg.br/internet/deputado/Dep_Detalhe.asp?id={{ deputado.numero }}">Profile no site da Camara</a>
+    <br />
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+{% endblock %}

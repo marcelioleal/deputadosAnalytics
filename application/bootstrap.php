@@ -24,7 +24,7 @@ $app['config'] = $config2[APPLICATION_ENV];
 
 if(APPLICATION_ENV != 'automatedtests') {
     $app->register(new Silex\Provider\MonologServiceProvider(), array(
-        'monolog.logfile' => __DIR__.'/../logs/live.log',
+        'monolog.logfile' => __DIR__.'/../logs/' . APPLICATION_ENV . '.log',
     ));
 } else {
     $app['monolog'] = new \Symfony\Component\HttpKernel\Log\NullLogger();

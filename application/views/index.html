@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+
+{% block js %}
+<script type="text/javascript">
+    jQuery( function() {
+        $('#btnDetalheDep').click( function ($e) {
+            window.location = "/Deputado/" + $("#cmbDeputados").val();
+        });
+    });
+</script>
+{% endblock %}
+
+
+{% block content %}
+    <p>Welcome to Deputados Analytics!</p>
+    <form name="frmDeputados" id="frmDeputados" method="POST">
+        <p>
+            Deputados: 
+            <select name="cmbDeputados" id="cmbDeputados">
+                {% for deputado in deputados %}
+                    <option value="{{ deputado.id }}_{{ deputado.nome|url_encode() }}">{{ deputado.nome }}</option>
+                {% endfor %}
+            </select>
+            <input type="button" name="btnDetalheDep" id="btnDetalheDep" value="Ver detalhe">
+        </p>
+    </form>
+{% endblock %}

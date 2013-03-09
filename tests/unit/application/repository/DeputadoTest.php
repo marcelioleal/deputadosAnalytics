@@ -53,4 +53,15 @@ class DeputadoTest extends \Base\DB
         $this->assertEquals(count($deputadosParam), count($returned));
     }
     
+    
+    public function testGetDeputado()
+    {
+        $id = 1;
+        
+        $expected = array('id' => '1', 'matricula' => '1234', 'nome' => 'Sérgio Malandro', 'identificacao' => '3456', 'numero' => '2345', 'partido' => 'PHAT', 'estado' => 'RJ');
+        
+        $deputado = $this->repository->getDeputado($id);
+        
+        $this->assertEquals($expected, $deputado);
+    }
 }
